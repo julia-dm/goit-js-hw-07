@@ -9,11 +9,10 @@ createSquare.addEventListener("click", function() {
   const minValue = Number(inputQuantity.min);
 
   if (amount >= minValue && amount <= maxValue) {
-    clearSquares(); // Видаляємо попередні квадрати перед створенням нових
+    clearSquares(); 
     createBoxes(amount);
   }
 });
-
 
 destroySquare.addEventListener("click", function() {
   inputQuantity.value = '';
@@ -21,6 +20,8 @@ destroySquare.addEventListener("click", function() {
 });
 
 function createBoxes(amount) {
+  const fragment = document.createDocumentFragment(); 
+
   for (let i = 0; i < amount; i++) {
     const size = 30 + i * 10;
     const color = getRandomHexColor();
@@ -28,15 +29,14 @@ function createBoxes(amount) {
     square.style.width = `${size}px`;
     square.style.height = `${size}px`;
     square.style.backgroundColor = color;
-    boxes.appendChild(square);
+    fragment.appendChild(square); 
   }
+
+  boxes.appendChild(fragment);
 }
 
-
 function clearSquares() {
-  while (boxes.firstChild) {
-    boxes.removeChild(boxes.firstChild);
-  }
+  boxes.innerHTML = ""; 
 }
 
 function getRandomHexColor() {
